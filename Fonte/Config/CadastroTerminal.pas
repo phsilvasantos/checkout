@@ -7,7 +7,7 @@ uses
   CadastroTemplate, Db, DBTables, RxQuery, Menus, StdCtrls, Mask, Grids,
   DBGrids, ComCtrls, ExtCtrls, RXCtrls, Buttons, jpeg, DBCtrls, FormResources,
   VarSys, ToolEdit, RXDBCtrl, RxDBComb, Printers, DBActns, ActnList,
-  ImgList, RxLookup, AdvOfficeStatusBar, AdvOfficeStatusBarStylers,
+  ImgList, RxLookup, AdvOfficeStatusBar, AdvOfficeStatusBarStylers, IniFiles,
   AdvPanel;
 
 type
@@ -81,7 +81,6 @@ type
     SQLTemplateECFA13ID: TStringField;
     SQLTemplateECFLookup: TStringField;
     ComboPortaECF: TDBComboBox;
-    SQLTemplateTERMA5ECFPORTACOM: TStringField;
     Label34: TLabel;
     DBEdit10: TDBEdit;
     SQLTemplateTERMCIMPPREVENDA: TStringField;
@@ -298,6 +297,7 @@ type
     SQLTemplateCONTROLA_CONSULTA_CP: TStringField;
     DBCheckBox8: TDBCheckBox;
     SQLTemplateCONTROLA_ES_RAPIDA: TStringField;
+    SQLTemplateTERMA5ECFPORTACOM: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure SQLTemplateCalcFields(DataSet: TDataSet);
     procedure RetornaEmpresaClick(Sender: TObject);
@@ -342,6 +342,9 @@ type
     procedure ImpConfDivClick(Sender: TObject);
   private
     { Private declarations }
+    procedure ConfiguraPorta;
+    procedure gravarIni(Tabela, Campo, Valor: String);
+
   public
     { Public declarations }
   end;
@@ -361,7 +364,8 @@ procedure TFormCadastroTerminais.FormCreate(Sender: TObject);
 begin
   inherited;
   Tabela := 'TERMINAL';
-  if not SQLTipoDocumento.Active then SQLTipoDocumento.Open; 
+  if not SQLTipoDocumento.Active then SQLTipoDocumento.Open;
+  ConfiguraPorta;  
 end;
 
 procedure TFormCadastroTerminais.SQLTemplateCalcFields(DataSet: TDataSet);
@@ -371,7 +375,6 @@ begin
     SQLTemplateStatusCaixaCalcField.Value := 'Aberto em ' + FormatDateTime('dd/mm/yyyy', SQLTemplateTERMDSTATUSCAIXA.Value) ;
   if SQLTemplateTERMCSTATUSCAIXA.Value = 'F' then
     SQLTemplateStatusCaixaCalcField.Value := 'Fechado em ' + FormatDateTime('dd/mm/yyyy', SQLTemplateTERMDSTATUSCAIXA.Value) ;
-
 end;
 
 procedure TFormCadastroTerminais.RetornaEmpresaClick(Sender: TObject);
@@ -583,6 +586,10 @@ begin
       Informa('Você selecionou como dispositivo de entrada "LEITOR", mas não informou o modelo do leitor. Verifique!');
       Abort;
     end;
+
+  gravarIni('Restaurante','ImpCaixaPorta',ComboPortaECF.Text);
+  gravarIni('Restaurante','ImpCaixaVeloc',ComboVelocidadeECF.Text);
+
   inherited;
 end;
 
@@ -705,6 +712,46 @@ begin
       SQLTemplateTERMCECFIMPRCONFDIVIMPITENS.AsString := 'N';
       SQLTemplateTERMCECFIMPRCONFDIVIMPFAT.AsString   := 'N';
     end;
+end;
+
+procedure TFormCadastroTerminais.ConfiguraPorta;
+var
+  K : Integer;
+begin
+  ComboPortaECF.Items.Clear;
+  DM.ACBrPosPrinter.Device.AcharPortasSeriais(ComboPortaECF.Items );
+  ComboPortaECF.Items.Add('\\localhost\Epson') ;
+  ComboPortaECF.Items.Add('c:\temp\ecf.txt') ;
+  ComboPortaECF.Items.Add('TCP:192.168.0.31:9100') ;
+
+  For K := 0 to Printer.Printers.Count-1 do
+    ComboPortaECF.Items.Add('RAW:'+Printer.Printers[K]);
+
+  ComboPortaECF.Items.Add('/dev/ttyS0') ;
+  ComboPortaECF.Items.Add('/dev/ttyS1') ;
+  ComboPortaECF.Items.Add('/dev/ttyUSB0') ;
+  ComboPortaECF.Items.Add('/dev/ttyUSB1') ;
+  ComboPortaECF.Items.Add('/tmp/ecf.txt') ;
+  ComboPortaECF.Items.Add('USB') ;
+  ComboPortaECF.Items.Add('COM1') ;
+  ComboPortaECF.Items.Add('COM2') ;
+  ComboPortaECF.Items.Add('COM3') ;
+  ComboPortaECF.Items.Add('COM4') ;
+  ComboPortaECF.Items.Add('COM5') ;
+  ComboPortaECF.Items.Add('COM6') ;
+  ComboPortaECF.Items.Add('COM7') ;
+  ComboPortaECF.Items.Add('LPT1') ;
+  ComboPortaECF.Items.Add('LPT2') ;
+end;
+
+procedure TFormCadastroTerminais.gravarIni(Tabela, Campo, Valor: String);
+var
+  ServerIni: TIniFile;
+begin
+  ServerIni := TIniFile.Create(ExtractFilePath(Application.ExeName) + 'Parceiro.ini');
+  ServerIni.WriteString(Tabela,Campo,Valor);
+  ServerIni.UpdateFile;
+  ServerIni.Free;
 end;
 
 end.

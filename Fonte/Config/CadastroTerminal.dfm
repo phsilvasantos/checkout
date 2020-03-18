@@ -1,6 +1,6 @@
 inherited FormCadastroTerminais: TFormCadastroTerminais
-  Left = 348
-  Top = 2
+  Left = 20
+  Top = 10
   Caption = 'Cadastro de Terminais'
   ClientHeight = 706
   ClientWidth = 1366
@@ -3173,12 +3173,6 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
       FixedChar = True
       Size = 13
     end
-    object SQLTemplateTERMA5ECFPORTACOM: TStringField
-      FieldName = 'TERMA5ECFPORTACOM'
-      Origin = 'DB.TERMINAL.TERMA5ECFPORTACOM'
-      FixedChar = True
-      Size = 5
-    end
     object SQLTemplateTERMA60IMPCARNE: TStringField
       FieldName = 'TERMA60IMPCARNE'
       Origin = 'DB.TERMINAL.TERMA60IMPCARNE'
@@ -3735,6 +3729,12 @@ inherited FormCadastroTerminais: TFormCadastroTerminais
       Origin = 'DB.TERMINAL.CONTROLA_ES_RAPIDA'
       FixedChar = True
       Size = 1
+    end
+    object SQLTemplateTERMA5ECFPORTACOM: TStringField
+      FieldName = 'TERMA5ECFPORTACOM'
+      Origin = 'DB.TERMINAL.TERMA5ECFPORTACOM'
+      FixedChar = True
+      Size = 30
     end
   end
   inherited UpdateSQLTemplate: TUpdateSQL

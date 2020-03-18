@@ -7,7 +7,7 @@ uses
   VarSYS, DataModuloTemplate, Db, DBTables, RxQuery, DBLists, IdComponent,
   IdTCPConnection, IdTCPClient, IdMessageClient, IdSMTP, IdBaseComponent,
   IdMessage, DBXpress, ZConnection, SqlExpr, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, ZAbstractConnection;
+  ZAbstractDataset, ZDataset, ZAbstractConnection, ACBrBase, ACBrPosPrinter;
 
 type
   TDM = class(TDMTemplate)
@@ -231,6 +231,7 @@ type
     SQLConfigVendaCFVENIMPFINANC: TStringField;
     SQLConfigGeralVERIFICA_CUPOM_PENDENTE: TStringField;
     SQLPrecoCliente: TRxQuery;
+    ACBrPosPrinter: TACBrPosPrinter;
     procedure DataModuleCreate(Sender: TObject);
     procedure SQLConfigContaBeforeEdit(DataSet: TDataSet);
     procedure SQLConfigContaNewRecord(DataSet: TDataSet);

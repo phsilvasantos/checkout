@@ -5,7 +5,6 @@ inherited DM: TDM
   Height = 462
   Width = 742
   inherited DB: TDatabase
-    Connected = False
     Left = 44
   end
   inherited SQLTemplate: TRxQuery
@@ -1417,5 +1416,17 @@ inherited DM: TDM
         Name = 'CLIEA13ID'
         ParamType = ptInput
       end>
+  end
+  object ACBrPosPrinter: TACBrPosPrinter
+    ConfigBarras.MostrarCodigo = False
+    ConfigBarras.LarguraLinha = 0
+    ConfigBarras.Altura = 0
+    ConfigBarras.Margem = 0
+    ConfigQRCode.Tipo = 2
+    ConfigQRCode.LarguraModulo = 4
+    ConfigQRCode.ErrorLevel = 0
+    LinhasEntreCupons = 0
+    Left = 600
+    Top = 256
   end
 end
