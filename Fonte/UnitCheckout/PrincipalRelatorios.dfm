@@ -1,6 +1,6 @@
 object FormPrincipalRelatorios: TFormPrincipalRelatorios
-  Left = 282
-  Top = 112
+  Left = 391
+  Top = 123
   Width = 672
   Height = 456
   Caption = 'Relat'#243'rio para Resumo de Caixa'
@@ -113,7 +113,7 @@ object FormPrincipalRelatorios: TFormPrincipalRelatorios
       Height = 25
       Cursor = crHandPoint
       Hint = 'Visualizar Relat'#243'rio'
-      Caption = 'Resumo de Caixa'
+      Caption = '&Resumo de Caixa'
       Flat = True
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack

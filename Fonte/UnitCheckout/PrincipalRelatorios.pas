@@ -281,7 +281,7 @@ var
 implementation
 
 uses
-  DataModulo, UnitLibrary, Math;
+  DataModulo, UnitLibrary, Math, VarSYS;
 
 {$R *.dfm}
 
@@ -756,6 +756,9 @@ begin
     dm.SQLConfigVenda.Open;
     dm.SQLUsuario.Close;
     dm.SQLUsuario.Open;
+    dm.SQLEmpresa.Close;
+    dm.SQLEmpresa.Open;
+    dm.SQLEmpresa.Locate('EMPRICOD',EmpresaCorrente,[loCaseInsensitive]);
   except
     on e: Exception do
     begin
