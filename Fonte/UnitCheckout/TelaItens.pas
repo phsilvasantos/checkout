@@ -2335,6 +2335,13 @@ begin
             DescItemVlr := 0;
           end;
         end;
+        if MostraPublicidade then
+        begin
+          slideshow.Visible := False;
+          AdvSmoothPanel5.Visible := False;
+          slideshow.Animation := True;
+          PagePrincipal.ActivePage := TabVenda;
+        end;
       end;
       if DescItemPerc > 0 then
         DescItemVlr := ValorItem * (DescItemPerc / 100);
