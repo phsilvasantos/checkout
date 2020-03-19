@@ -202,6 +202,7 @@ object FormTelaItensCrediario: TFormTelaItensCrediario
         'DICOD'
       'where'
       '  NOTAFISCAL.CLIEA13ID = :CLIEA13ID AND'
+      '  NOTAFISCAL.NOFIA13ID = :CUPOA13ID AND'
       '  NOTAFISCAL.NOFICSTATUS = '#39'E'#39' and'
       '  (%MProdutoNF)'
       'order by 10 descending')
@@ -235,6 +236,11 @@ object FormTelaItensCrediario: TFormTelaItensCrediario
       item
         DataType = ftFixedChar
         Name = 'CLIEA13ID'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CUPOA13ID'
         ParamType = ptUnknown
       end>
     object SQLItemDOCUMENTO: TStringField
