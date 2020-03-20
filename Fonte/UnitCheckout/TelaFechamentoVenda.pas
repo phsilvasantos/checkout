@@ -6637,6 +6637,7 @@ begin
       DM.SQLTemplate.SQL.Add('from CONTASRECEBER CR ');
       DM.SQLTemplate.SQL.Add('where CR.CTRCDVENC < :DATA and ');
       DM.SQLTemplate.SQL.Add('CR.CLIEA13ID = :CLIENTE and ');
+      DM.SQLTemplate.SQL.Add('CR.CTRCCSTATUS <> ''C'' and ');
       DM.SQLTemplate.SQL.Add('CR.CTRCN2VLR > CR.CTRCN2TOTREC ');
       DM.SQLTemplate.ParamByName('DATA').AsDate := Now;
       DM.SQLTemplate.ParamByName('CLIENTE').AsString := ClienteVenda;
